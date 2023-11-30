@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Dto\SignalR.Dto.csproj" />
     <ProjectReference Include="..\SignalR.Entity\SignalR.Entity.csproj" />
   </ItemGroup>
 

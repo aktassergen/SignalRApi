@@ -9,5 +9,6 @@ namespace SignalR.BL.Abstract
 {
     public interface IProductService : IGenericService<Product>
     {
+        List<Product> TGetProductsWithCategories();
     }
 }

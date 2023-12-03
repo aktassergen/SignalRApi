@@ -3,9 +3,22 @@ using SignalR.BL.Concrete;
 using SignalR.DAL.Abstract;
 using SignalR.DAL.Concrete;
 using SignalR.DAL.EntityFrameWork;
+using SignalRApi.Hubs;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyHeader()//herhangibi baþlýða izin versin
+        .AllowAnyMethod()//herhangibi metoda izin versin
+        .SetIsOriginAllowed((host) => true)//herhangibi kaynaða izin versin
+        .AllowCredentials();//herhangibi Kimliðe izin versin
+	});
+});
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<SignalRContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());//otomapper icin kullanýlan recister yöntem
@@ -50,11 +63,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("CorsPolicy");//yukardaki kullanmýþ olduðum keyi çaðýrmýþ oldum
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<SignalRHub>("/signalrhub");
 
 app.Run();
+
+//diyelim ki bir yere istekte bulunulacak localhost://1234/swagger/category/index bu porttan sonra istekte bulunmak istediðim yer neresi
+//localhost://1234/signalrhub yukardaki yazýðum maphub ile buraya istekte bulunuyorum

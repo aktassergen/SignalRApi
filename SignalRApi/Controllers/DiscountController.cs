@@ -39,14 +39,14 @@ namespace SignalRApi.Controllers
             });
             return Ok("indirim bilgisi eklendi");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteDiscount(int id)
         {
             var value = _discountService.TGetById(id);
             _discountService.TDelete(value);
             return Ok("iletişim bilgisi silindi");
         }
-        [HttpGet("GetDiscount")]
+        [HttpGet("{id}")]
         public IActionResult GetDiscount(int id)
         {
             var value = _discountService.TGetById(id);
@@ -57,11 +57,13 @@ namespace SignalRApi.Controllers
         {
             _discountService.TUpdate(new Discount()
             {
+                
                DiscountTitle=updateDiscountDto.DiscountTitle,
                DiscountDescription=updateDiscountDto.DiscountDescription,
                DiscountImageUrl=updateDiscountDto.DiscountImageUrl,
                DiscountAmount = updateDiscountDto.DiscountAmount,
-               DiscountId = updateDiscountDto.DiscountId
+               DiscountId = updateDiscountDto.DiscountId,
+               
             });
             return Ok("indirim  güncellendi");
         }

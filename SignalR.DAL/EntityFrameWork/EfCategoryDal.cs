@@ -15,5 +15,23 @@ namespace SignalR.DAL.EntityFrameWork
         public EfCategoryDal(SignalRContext context) : base(context)
         {
         }
-    }
+
+		public int ActiveCategoryCount()
+		{
+			using var context=new SignalRContext();
+			return context.Categories.Where(x=>x.CategoryStatus==true).Count();
+		}
+
+		public int CategoryCount()
+		{
+			using var context = new SignalRContext();
+			return context.Categories.Count();//katagorinin sayısını dönen metot
+		}
+
+		public int PassiveCategoryCount()
+		{
+			using var context = new SignalRContext();
+			return context.Categories.Where(x => x.CategoryStatus == false).Count();
+		}
+	}
 }

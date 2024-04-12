@@ -18,7 +18,17 @@ namespace SignalR.BL.Concrete
             _productDal = productDal;
         }
 
-        public void TAdd(Product entity)
+		public int TProductCountByCategoryNameDrink()
+		{
+			return _productDal.ProductCountByCategoryNameDrink();
+		}
+
+		public int TProductCountByCategoryNameHamburger()
+		{
+			return _productDal.ProductCountByCategoryNameHamburger();
+		}
+
+		public void TAdd(Product entity)
         {
             _productDal.Add(entity);
         }
@@ -43,7 +53,12 @@ namespace SignalR.BL.Concrete
             return _productDal.GetProductsWithCategories();
         }
 
-        public void TUpdate(Product entity)
+		public int TProductCount()
+		{
+			return _productDal.ProductCount();
+		}
+
+		public void TUpdate(Product entity)
         {
             _productDal.Update(entity);
         }

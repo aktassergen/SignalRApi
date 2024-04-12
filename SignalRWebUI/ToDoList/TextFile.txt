@@ -5,3 +5,15 @@
 
 --katagori adına göre ürün sayısı 1
 --katagori adına göre ürün sayısı 2
+
+--ortalama fiyat
+--en yüksek ürünlü fiyat
+--en düşük ürünlü fiyat
+--ortalama hamburger fiyatı
+
+--toplam sipariş sayısı
+--aktif sipariş sayısı
+--son sipariş tutarı
+--kasadaki tutar
+--bugünki kazanç
+--masa sayısı

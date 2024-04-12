@@ -7,6 +7,7 @@ using SignalR.Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,6 +43,30 @@ namespace SignalR.DAL.EntityFrameWork
 		{
 			using var context = new SignalRContext();
 			return context.Products.Where(x => x.CategoryId == (context.Categories.Where(y => y.CategoryName == "Hamburgerler").Select(z => z.CategoryId).FirstOrDefault())).Count();
+		}
+
+		public string ProductNameByMaxPrice()
+		{
+			using var context=new SignalRContext();
+			return context.Products.Where(x => x.ProductPrice == (context.Products.Max(y => y.ProductPrice))).Select(z => z.ProductName).FirstOrDefault();
+		}
+
+		public string ProductNameByMinPrice()
+		{
+			using var context = new SignalRContext();
+			return context.Products.Where(x => x.ProductPrice == (context.Products.Min(y => y.ProductPrice))).Select(z => z.ProductName).FirstOrDefault();
+		}
+
+		public decimal ProductPriceAvg()
+		{
+			using var context=new SignalRContext();
+			return (decimal)context.Products.Average(x => x.ProductPrice);
+		}
+
+		public decimal ProductAvgPriceByHamburger()
+		{
+			using var context = new SignalRContext();
+			return (decimal)context.Products.Where(x => x.CategoryId == (context.Categories.Where(y => y.CategoryName == "Hamburgerler").Select(z => z.CategoryId).FirstOrDefault())).Average(w=>w.ProductPrice);
 		}
 	}
 }

@@ -28,6 +28,17 @@ namespace SignalR.DAL.EntityFrameWork
 			return context.Orders.OrderByDescending(x => x.OrderId).Take(1).Select(y => y.OrderTotalPrice).FirstOrDefault();//z den a yadoğru sırala
 		}
 
+		public decimal TodayTotalPrice()
+		{
+			using var context = new SignalRContext();
+			var today = DateTime.Now;
+			return context.Orders
+						  .Where(x => x.OrderDate.Year == today.Year &&
+									  x.OrderDate.Month == today.Month &&
+									  x.OrderDate.Day == today.Day)
+						  .Sum(y => y.OrderTotalPrice);
+		}
+
 		public int TotalOrderCount()
 		{
 			using var context = new SignalRContext();

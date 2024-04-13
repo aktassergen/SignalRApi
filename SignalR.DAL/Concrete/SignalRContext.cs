@@ -21,6 +21,8 @@ namespace SignalR.DAL.Concrete
         public DbSet<Testimonial> Testimonials { get; set; }
 		public DbSet<Order> Orders { get; set; }
 		public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<MoneyCase> MoneyCases { get; set; }
+        public DbSet<MenuTable> MenuTables { get; set; }
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=SERGEN\\SQLEXPRESS;Initial Catalog=SignalR;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");

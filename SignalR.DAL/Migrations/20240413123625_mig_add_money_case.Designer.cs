@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SignalR.DAL.Concrete;
 
@@ -11,9 +12,10 @@ using SignalR.DAL.Concrete;
 namespace SignalR.DAL.Migrations
 {
     [DbContext(typeof(SignalRContext))]
-    partial class SignalRContextModelSnapshot : ModelSnapshot
+    [Migration("20240413123625_mig_add_money_case")]
+    partial class mig_add_money_case
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -193,26 +195,6 @@ namespace SignalR.DAL.Migrations
                     b.ToTable("Feature");
                 });
 
-            modelBuilder.Entity("SignalR.Entity.Entities.MenuTable", b =>
-                {
-                    b.Property<int>("MenuTableId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MenuTableId"), 1L, 1);
-
-                    b.Property<bool>("ManuTableStatus")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MenuTableName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MenuTableId");
-
-                    b.ToTable("MenuTables");
-                });
-
             modelBuilder.Entity("SignalR.Entity.Entities.MoneyCase", b =>
                 {
                     b.Property<int>("MoneyCaseId")
@@ -238,7 +220,7 @@ namespace SignalR.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
 
                     b.Property<DateTime>("OrderDate")
-                        .HasColumnType("Date");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("OrderDescription")
                         .IsRequired()

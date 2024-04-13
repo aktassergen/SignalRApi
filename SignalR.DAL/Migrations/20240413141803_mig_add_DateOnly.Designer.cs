@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SignalR.DAL.Concrete;
 
@@ -11,9 +12,10 @@ using SignalR.DAL.Concrete;
 namespace SignalR.DAL.Migrations
 {
     [DbContext(typeof(SignalRContext))]
-    partial class SignalRContextModelSnapshot : ModelSnapshot
+    [Migration("20240413141803_mig_add_DateOnly")]
+    partial class mig_add_DateOnly
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,26 +193,6 @@ namespace SignalR.DAL.Migrations
                     b.HasKey("FeatureId");
 
                     b.ToTable("Feature");
-                });
-
-            modelBuilder.Entity("SignalR.Entity.Entities.MenuTable", b =>
-                {
-                    b.Property<int>("MenuTableId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MenuTableId"), 1L, 1);
-
-                    b.Property<bool>("ManuTableStatus")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MenuTableName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MenuTableId");
-
-                    b.ToTable("MenuTables");
                 });
 
             modelBuilder.Entity("SignalR.Entity.Entities.MoneyCase", b =>

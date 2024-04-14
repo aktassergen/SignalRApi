@@ -15,7 +15,7 @@ namespace SignalRApi.Controllers
             _sliderService = sliderService;
         }
 
-        [HttpGet("SliderListAll")]
+        [HttpGet]
         public IActionResult SliderListAll()
         {
             return Ok(_sliderService.TGetListAll());

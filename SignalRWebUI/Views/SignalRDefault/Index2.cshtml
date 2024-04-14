@@ -31,9 +31,6 @@
                                 },1000);//bağlantı isteğini belli periyotlara düşüreceğiz timeout ile ne kadar sürede bir bağlanacağimiz ile alakalı tıplı timer gibi
                                
                             }).catch((err) => { console.log(err) });
-
-
-
                             connection.on("ReceiveCategoryCount", (value) => {
                                 $("#categorycount").text(value);
                             });//metodun içindekine istekte bulunduk

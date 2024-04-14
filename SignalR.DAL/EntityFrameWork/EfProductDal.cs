@@ -60,7 +60,7 @@ namespace SignalR.DAL.EntityFrameWork
 		public decimal ProductPriceAvg()
 		{
 			using var context=new SignalRContext();
-			return (decimal)context.Products.Average(x => x.ProductPrice);
+			return Convert.ToDecimal(context.Products.Average(x => x.ProductPrice));
 		}
 
 		public decimal ProductAvgPriceByHamburger()

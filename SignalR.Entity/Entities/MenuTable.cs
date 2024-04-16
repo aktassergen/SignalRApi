@@ -10,7 +10,7 @@ namespace SignalR.Entity.Entities
 	{
 		public int MenuTableId { get; set; }
 		public string MenuTableName { get; set; }
-
 		public bool ManuTableStatus { get; set; }
-	}
+        public List<Basket> Baskets { get; set; }
+    }
 }

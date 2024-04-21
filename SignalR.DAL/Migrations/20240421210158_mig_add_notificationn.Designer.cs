@@ -12,8 +12,8 @@ using SignalR.DAL.Concrete;
 namespace SignalR.DAL.Migrations
 {
     [DbContext(typeof(SignalRContext))]
-    [Migration("20240412213227_mig_add_OrderAndOrderDetails")]
-    partial class mig_add_OrderAndOrderDetails
+    [Migration("20240421210158_mig_add_notificationn")]
+    partial class mig_add_notificationn
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,6 +47,38 @@ namespace SignalR.DAL.Migrations
                     b.HasKey("AboutId");
 
                     b.ToTable("Abouts");
+                });
+
+            modelBuilder.Entity("SignalR.Entity.Entities.Basket", b =>
+                {
+                    b.Property<int>("BasketId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BasketId"), 1L, 1);
+
+                    b.Property<decimal>("Count")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("MenuTableId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("BasketId");
+
+                    b.HasIndex("MenuTableId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Baskets");
                 });
 
             modelBuilder.Entity("SignalR.Entity.Entities.Booking", b =>
@@ -124,6 +156,22 @@ namespace SignalR.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("FooterTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OpenDays")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OpenDaysDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OpenHours")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ContantId");
 
                     b.ToTable("Contants");
@@ -195,6 +243,73 @@ namespace SignalR.DAL.Migrations
                     b.ToTable("Feature");
                 });
 
+            modelBuilder.Entity("SignalR.Entity.Entities.MenuTable", b =>
+                {
+                    b.Property<int>("MenuTableId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MenuTableId"), 1L, 1);
+
+                    b.Property<bool>("ManuTableStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MenuTableName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MenuTableId");
+
+                    b.ToTable("MenuTables");
+                });
+
+            modelBuilder.Entity("SignalR.Entity.Entities.MoneyCase", b =>
+                {
+                    b.Property<int>("MoneyCaseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MoneyCaseId"), 1L, 1);
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("MoneyCaseId");
+
+                    b.ToTable("MoneyCases");
+                });
+
+            modelBuilder.Entity("SignalR.Entity.Entities.Notification", b =>
+                {
+                    b.Property<int>("NotificationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NotificationId"), 1L, 1);
+
+                    b.Property<DateTime>("NotificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NotificationDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NotificationIcon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("NotificationStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NotificationType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NotificationId");
+
+                    b.ToTable("Notifications");
+                });
+
             modelBuilder.Entity("SignalR.Entity.Entities.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -204,7 +319,7 @@ namespace SignalR.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
 
                     b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("Date");
 
                     b.Property<string>("OrderDescription")
                         .IsRequired()
@@ -289,6 +404,43 @@ namespace SignalR.DAL.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("SignalR.Entity.Entities.Slider", b =>
+                {
+                    b.Property<int>("SliderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SliderId"), 1L, 1);
+
+                    b.Property<string>("Description1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description3")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title3")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SliderId");
+
+                    b.ToTable("Sliders");
+                });
+
             modelBuilder.Entity("SignalR.Entity.Entities.SosialMedia", b =>
                 {
                     b.Property<int>("SocialMediaId")
@@ -346,6 +498,25 @@ namespace SignalR.DAL.Migrations
                     b.ToTable("Testimonials");
                 });
 
+            modelBuilder.Entity("SignalR.Entity.Entities.Basket", b =>
+                {
+                    b.HasOne("SignalR.Entity.Entities.MenuTable", "MenuTable")
+                        .WithMany("Baskets")
+                        .HasForeignKey("MenuTableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SignalR.Entity.Entities.Product", "Product")
+                        .WithMany("Baskets")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MenuTable");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("SignalR.Entity.Entities.OrderDetail", b =>
                 {
                     b.HasOne("SignalR.Entity.Entities.Order", "Order")
@@ -381,6 +552,11 @@ namespace SignalR.DAL.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("SignalR.Entity.Entities.MenuTable", b =>
+                {
+                    b.Navigation("Baskets");
+                });
+
             modelBuilder.Entity("SignalR.Entity.Entities.Order", b =>
                 {
                     b.Navigation("OrderDetails");
@@ -388,6 +564,8 @@ namespace SignalR.DAL.Migrations
 
             modelBuilder.Entity("SignalR.Entity.Entities.Product", b =>
                 {
+                    b.Navigation("Baskets");
+
                     b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618

@@ -22,6 +22,23 @@ namespace SignalR.DAL.EntityFrameWork
 			return context.Notifications.Where(x=>x.NotificationStatus==false).ToList();
 		}
 
+		public void NotificationChangeToFalse(int id)
+		{
+			
+			using var context = new SignalRContext();
+			var value = context.Notifications.Find(id);
+			value.NotificationStatus = false;
+			context.SaveChanges();
+		}
+
+		public void NotificationChangeToTrue(int id)
+		{
+			using var context = new SignalRContext();
+			var value = context.Notifications.Find(id);
+			value.NotificationStatus = true;
+			context.SaveChanges();
+		}
+
 		public int NotificationCountByStatusFalse()
 		{
 			using var context = new SignalRContext();

@@ -11,5 +11,7 @@ namespace SignalR.DAL.Abstract
 	{
 		int NotificationCountByStatusFalse();
 		List<Notification> GetAllNotificationByFalse();
+		void NotificationChangeToTrue(int id);
+		void NotificationChangeToFalse(int id);
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SignalR.Entity.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.DAL.Concrete
 {
-    public class SignalRContext:DbContext
+    public class SignalRContext:IdentityDbContext<AppUser,AppRole,int>
     {
         public DbSet<About> Abouts { get; set; }
         public DbSet<Booking> Bookings { get; set; }
@@ -33,6 +34,7 @@ namespace SignalR.DAL.Concrete
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<About>().HasKey(a => a.AboutId);
             modelBuilder.Entity<Booking>().HasKey(a => a.BookingId);
             modelBuilder.Entity<Category>().HasKey(a => a.CategoryId);
@@ -42,8 +44,6 @@ namespace SignalR.DAL.Concrete
             modelBuilder.Entity<Product>().HasKey(a => a.ProductId);
             modelBuilder.Entity<SosialMedia>().HasKey(a => a.SocialMediaId);
             modelBuilder.Entity<Testimonial>().HasKey(a => a.TestimonialId);
-
-
         }
 
 

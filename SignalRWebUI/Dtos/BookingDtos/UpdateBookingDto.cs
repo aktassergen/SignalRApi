@@ -14,5 +14,6 @@ namespace SignalRWebUI.Dtos.BookingDtos
         public string BookingMail { get; set; }
         public int BookingCount { get; set; }
         public DateTime BookingDate { get; set; }
-    }
+		public string BookingDescription { get; set; }
+	}
 }

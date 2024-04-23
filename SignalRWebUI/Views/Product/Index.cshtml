@@ -1,7 +1,8 @@
 ﻿@model List<ResultProductDto>
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/AdminLayout/Index.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/AdminLayout/Index.cshtml";
+	int count = 0;
 }
 
 
@@ -34,7 +35,7 @@
 								@foreach (var item in Model)
 								{
 									<tr>
-										<td>@item.ProductId</td>
+										<th>@count</th>
 										<td>@item.ProductName</td>
 										<td>@item.ProductPrice</td>
 										<td>@item.CategoryName</td>

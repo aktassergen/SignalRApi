@@ -82,7 +82,22 @@ namespace SignalRApi.Controllers
            });
             return Ok(value.ToList());
         }
-        [HttpPost]
+		[HttpGet("ProductPriceBySteakBurger")]
+		public IActionResult ProductPriceBySteakBurger()
+		{
+			return Ok(_productService.TProductPriceBySteakBurger());
+		}
+		[HttpGet("TotalPriceByDrinkCategory")]
+		public IActionResult TotalPriceByDrinkCategory()
+		{
+			return Ok(_productService.TTotalPriceByDrinkCategory());
+		}
+		[HttpGet("TotalPriceBySaladCategory")]
+		public IActionResult TotalPriceBySaladCategory()
+		{
+			return Ok(_productService.TTotalPriceBySaladCategory());
+		}
+		[HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto)
         {
             _productService.TAdd(new Product()

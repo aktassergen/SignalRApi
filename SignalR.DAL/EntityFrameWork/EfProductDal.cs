@@ -68,5 +68,25 @@ namespace SignalR.DAL.EntityFrameWork
 			using var context = new SignalRContext();
 			return (decimal)context.Products.Where(x => x.CategoryId == (context.Categories.Where(y => y.CategoryName == "Hamburgerler").Select(z => z.CategoryId).FirstOrDefault())).Average(w=>w.ProductPrice);
 		}
+
+		public decimal ProductPriceBySteakBurger()
+		{
+			using var context = new SignalRContext();
+			return (decimal)context.Products.Where(x => x.ProductName == "Steak Burger").Select(y => y.ProductPrice).FirstOrDefault();
+		}
+
+		public decimal TotalPriceByDrinkCategory()
+		{
+			using var context = new SignalRContext();
+			int id = context.Categories.Where(x => x.CategoryName == "İçecek").Select(y => y.CategoryId).FirstOrDefault();
+			return (decimal)context.Products.Where(x => x.CategoryId == id).Sum(y => y.ProductPrice);
+		}
+
+		public decimal TotalPriceBySaladCategory()
+		{
+			using var context = new SignalRContext();
+			int id = context.Categories.Where(x => x.CategoryName == "Salatalar").Select(y => y.CategoryId).FirstOrDefault();
+			return (decimal)context.Products.Where(x => x.CategoryId == id).Sum(y => y.ProductPrice);
+		}
 	}
 }

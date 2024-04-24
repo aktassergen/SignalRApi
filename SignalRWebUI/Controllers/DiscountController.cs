@@ -16,14 +16,12 @@ namespace SignalRWebUI.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			var client = _httpClientFactory.CreateClient();//istemci oluşturuldu
-			var responseMessage = await client.GetAsync("https://localhost:7298/api/Discount");//verileri istemek için kullanılan metot içerisinde adres olacak
-			if (responseMessage.IsSuccessStatusCode)//kod 200 lü dönerse yani başarılı olursa
+			var client = _httpClientFactory.CreateClient();
+			var responseMessage = await client.GetAsync("https://localhost:7298/api/Discount");
+			if (responseMessage.IsSuccessStatusCode)
 			{
-				var jsonData = await responseMessage.Content.ReadAsStringAsync();//içeriği string formatında oku
-																				 //jsondan gelen içeriği
-				var values = JsonConvert.DeserializeObject<List<ResultDiscountDto>>(jsonData);//jesondaki veriyi çözmek için kullandığım için deserialize
-				//listelerken deserialize ekleme güncellemede serialize
+				var jsonData = await responseMessage.Content.ReadAsStringAsync();
+				var values = JsonConvert.DeserializeObject<List<ResultDiscountDto>>(jsonData);
 				return View(values);
 			}
 			return View();
@@ -39,7 +37,7 @@ namespace SignalRWebUI.Controllers
 			var client = _httpClientFactory.CreateClient();
 			var jsonData = JsonConvert.SerializeObject(createDiscountDto);
 			StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-			var responseMessage = await client.PostAsync("https://localhost:7298/api/Discount", stringContent);//sayfaya giderken string contenti de götürüyor
+			var responseMessage = await client.PostAsync("https://localhost:7298/api/Discount", stringContent);
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				return RedirectToAction("Index");
@@ -58,9 +56,8 @@ namespace SignalRWebUI.Controllers
 		}
 		public async Task<IActionResult> UpdateDiscount(int id)
 		{
-			//updateCategoryDto.CategoryStatus = true;
 			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync($"https://localhost:7298/api/Discount/{id}");//once güncellemek istediğimiz veriyi getiriyoruz
+			var responseMessage = await client.GetAsync($"https://localhost:7298/api/Discount/{id}");
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -81,6 +78,18 @@ namespace SignalRWebUI.Controllers
 				return RedirectToAction("Index");
 			}
 			return View();
+		}
+		public async Task<IActionResult> ChangeStatusToTrue(int id)
+		{
+			var client = _httpClientFactory.CreateClient();
+			await client.GetAsync($"https://localhost:7298/api/Discount/ChangeStatusToTrue/{id}");
+			return RedirectToAction("Index");
+		}
+		public async Task<IActionResult> ChangeStatusToFalse(int id)
+		{
+			var client = _httpClientFactory.CreateClient();
+			await client.GetAsync($"https://localhost:7298/api/Discount/ChangeStatusToFalse/{id}");
+			return RedirectToAction("Index");
 		}
 	}
 }

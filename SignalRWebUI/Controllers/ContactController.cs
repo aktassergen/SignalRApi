@@ -17,13 +17,11 @@ namespace SignalRWebUI.Controllers
 		public async Task<IActionResult> Index()
 		{
 			var client = _httpClientFactory.CreateClient();//istemci oluşturuldu
-			var responseMessage = await client.GetAsync("https://localhost:7298/api/Contact");//verileri istemek için kullanılan metot içerisinde adres olacak
-			if (responseMessage.IsSuccessStatusCode)//kod 200 lü dönerse yani başarılı olursa
+			var responseMessage = await client.GetAsync("https://localhost:7298/api/Contact");
+			if (responseMessage.IsSuccessStatusCode)
 			{
-				var jsonData = await responseMessage.Content.ReadAsStringAsync();//içeriği string formatında oku
-																				 //jsondan gelen içeriği
-				var values = JsonConvert.DeserializeObject<List<ResultContactDto>>(jsonData);//jesondaki veriyi çözmek için kullandığım için deserialize
-																						   //listelerken deserialize ekleme güncellemede serialize
+				var jsonData = await responseMessage.Content.ReadAsStringAsync();
+				var values = JsonConvert.DeserializeObject<List<ResultContactDto>>(jsonData);
 				return View(values);
 			}
 			return View();
@@ -39,7 +37,7 @@ namespace SignalRWebUI.Controllers
 			var client = _httpClientFactory.CreateClient();
 			var jsonData = JsonConvert.SerializeObject(createContactDto);
 			StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-			var responseMessage = await client.PostAsync("https://localhost:7298/api/Contact", stringContent);//sayfaya giderken string contenti de götürüyor
+			var responseMessage = await client.PostAsync("https://localhost:7298/api/Contact", stringContent);
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				return RedirectToAction("Index");
@@ -58,9 +56,8 @@ namespace SignalRWebUI.Controllers
 		}
 		public async Task<IActionResult> UpdateContact(int id)
 		{
-			//updateCategoryDto.CategoryStatus = true;
 			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync($"https://localhost:7298/api/Contact/{id}");//once güncellemek istediğimiz veriyi getiriyoruz
+			var responseMessage = await client.GetAsync($"https://localhost:7298/api/Contact/{id}");
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var jsonData = await responseMessage.Content.ReadAsStringAsync();

@@ -1,7 +1,8 @@
 ﻿@model List<ResultNotificationDto>
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/AdminLayout/Index.cshtml";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/AdminLayout/Index.cshtml";
+	int count = 0;
 }
 
 
@@ -34,8 +35,9 @@
 							<tbody>
 								@foreach (var item in Model)
 								{
+									count++;
 									<tr>
-										<td>@item.NotificationId</td>
+										<th>@count</th>
 										<td>@item.NotificationDescription</td>
 										<td>@item.NotificationDate</td>
 										<td>@item.NotificationStatus</td>

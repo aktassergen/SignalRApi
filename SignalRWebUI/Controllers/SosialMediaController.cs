@@ -17,13 +17,11 @@ namespace SignalRWebUI.Controllers
 		public async Task<IActionResult> Index()
 		{
 			var client = _httpClientFactory.CreateClient();//istemci oluşturuldu
-			var responseMessage = await client.GetAsync("https://localhost:7298/api/SosialMedia");//verileri istemek için kullanılan metot içerisinde adres olacak
-			if (responseMessage.IsSuccessStatusCode)//kod 200 lü dönerse yani başarılı olursa
+			var responseMessage = await client.GetAsync("https://localhost:7298/api/SosialMedia");
+			if (responseMessage.IsSuccessStatusCode)
 			{
-				var jsonData = await responseMessage.Content.ReadAsStringAsync();//içeriği string formatında oku
-																				 //jsondan gelen içeriği
-				var values = JsonConvert.DeserializeObject<List<ResultSosialMediaDto>>(jsonData);//jesondaki veriyi çözmek için kullandığım için deserialize
-																							  //listelerken deserialize ekleme güncellemede serialize
+				var jsonData = await responseMessage.Content.ReadAsStringAsync();
+				var values = JsonConvert.DeserializeObject<List<ResultSosialMediaDto>>(jsonData);
 				return View(values);
 			}
 			return View();

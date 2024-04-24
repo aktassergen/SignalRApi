@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
- namespace SignalRWebUI.Dtos.SliderDtos
+namespace SignalRWebUI.Dtos.SliderDtos
 {
-	public class ResultSliderDto
+	public class UpdateSliderDto
 	{
 		public int SliderId { get; set; }
 		public string Title1 { get; set; }

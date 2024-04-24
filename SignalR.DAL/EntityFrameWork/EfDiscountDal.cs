@@ -31,5 +31,12 @@ namespace SignalR.DAL.EntityFrameWork
 			value.DiscountStatus = true;
 			context.SaveChanges();
 		}
+
+		public List<Discount> GetListByStatusTrue()
+		{
+			using var context = new SignalRContext();
+			var value = context.Discount.Where(x=>x.DiscountStatus==true).ToList();
+			return value;
+		}
 	}
 }

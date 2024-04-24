@@ -1,0 +1,10 @@
+﻿@model List<ResultSosialMediaDto>
+
+<div class="footer_social">
+    @foreach (var item in Model)
+    {
+        <a href="@item.SocialUrl">
+            <i class="@item.SocialIcon" aria-hidden="true"></i>
+        </a>
+    }
+</div>

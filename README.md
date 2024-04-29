@@ -10,8 +10,8 @@
 * Automapper
 * MSSQL
 * PgAdmin
-* Raporlama
-* Loglama
+* Report
+* Log
 * Ajax
 * Identity
 * JWT

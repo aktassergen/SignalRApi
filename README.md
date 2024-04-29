@@ -3,7 +3,7 @@
 
 ## This project is a 25-hour SignalR project shared by Murat Yüceadağ on her Udemy channel.
 
-* The project is a restaurant that can meet all web requests. In the project, the user can view the food orders, table occupancy status, income statements, etc. for those who want to order a meal. It is a dynamic NVC-Web API project that provides convenience to the Admin side in obtaining instant data and instant statistics with SignalR. *
+* The project is a restaurant that can meet all web requests. In the project, the user can view the food orders, table occupancy status, income statements, etc. for those who want to order a meal. It is a dynamic NVC-Web API project that provides convenience to the Admin side in obtaining instant data and instant statistics with SignalR. 
 # Used Technologies
 * SMTP Mail
 * SignalR
